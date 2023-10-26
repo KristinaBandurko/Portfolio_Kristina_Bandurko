@@ -1,8 +1,7 @@
 # Исследование данных сервиса “Яндекс.Музыка” — сравнение пользователей двух городов
 
-[Полный файл исследования с кодом]
-()
-[PDF - ход исследования без кода](https://github.com/KristinaBandurko/Yandex.Practice.MyProjects/blob/main/Project_1.YandexMusic/1_%D0%98%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85_%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0_%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D0%9C%D1%83%D0%B7%D1%8B%D0%BA%D0%B0.pdf)  
+[Полный файл исследования с кодом](https://github.com/KristinaBandurko/YandexWorkshop/blob/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%201.%D0%98%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20%E2%80%9C%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81.%D0%9C%D1%83%D0%B7%D1%8B%D0%BA%D0%B0%E2%80%9D/1_%D0%98%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D0%9C%D1%83%D0%B7%D1%8B%D0%BA%D0%B0.ipynb)
+[PDF - ход исследования без кода](https://github.com/KristinaBandurko/YandexWorkshop/blob/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%201.%D0%98%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20%E2%80%9C%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81.%D0%9C%D1%83%D0%B7%D1%8B%D0%BA%D0%B0%E2%80%9D/1_%D0%98%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85_%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0_%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D0%9C%D1%83%D0%B7%D1%8B%D0%BA%D0%B0.pdf)  
 
 
 ## Описание проекта
