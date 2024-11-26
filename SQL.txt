@@ -1,0 +1,77 @@
+WITH tab as ( -- 1-я витрина
+            SELECT *
+            FROM formats.product_movements
+            WHERE type_of_movement = 'Отгрузка'
+                  --and toYear(date_day) = 2024
+                   and date_day between '2024-09-24' and '2024-10-08'
+            ),
+mn as ( -- ограничиваем тип филиалов
+      SELECT id, name, code, type_name, rrc_name, territory_4_id
+      FROM dict.branch b
+      WHERE is_deleted = FALSE
+            AND type_name in ('М', 'Д', 'Р')
+      ),
+t as ( -- выводим 1-ю витрину с ограничениями по филиалам
+        SELECT *
+        FROM tab join mn ON tab.branch = mn.id
+        ),
+s as ( -- связки Филиал-Концентратор
+        SELECT DISTINCT a.`Филиал`, b.`Наименование`, b.`ФилиалКонцентратор`
+        FROM S.Lokatsii_Filialy a
+        JOIN S.Lokatsii b
+        ON a.`Ссылка` = b.`Ссылка`
+        WHERE b.`ПометкаУдаления` = 0
+      ),
+f as ( -- добавляем ОТПРАВИТЕЛЯ
+        SELECT t.date_day, t.branch, s.`b.Наименование` as "Концентратор_1", b.`ФилиалКонцентратор` as "Гуид К1",
+        t.product,  t.recipient_branch,  t.document,  t.sign, 
+        t.type_of_movement,  t.count,  t.cost
+        FROM t left join s
+             ON t.branch = s.`Филиал`
+      ),
+mfk as (
+        SELECT  BranchId, BranchConfModel
+        FROM (
+        SELECT Period, BranchId, BranchConfModel,
+               ROW_NUMBER() OVER(PARTITION BY BranchId ORDER BY Period DESC) rn
+        FROM formats_bi.OnBranchStats
+        WHERE BranchId <> '00000000-0000-0000-0000-000000000000'
+       )
+WHERE rn = 1
+),
+r as ( --добавляем  ПОЛУЧАТЕЛЯ
+      SELECT f.date_day, f.branch, f."Концентратор_1", "Гуид К1", f.product, f.recipient_branch,  s.`b.Наименование` as "Концентратор_2",  f.document, f.sign, f.type_of_movement, f.count, f.cost
+      FROM f JOIN s
+      ON f.recipient_branch = s.`Филиал`
+     ),
+fg as (
+        SELECT r.date_day, r.branch, r."Концентратор_1", r."Гуид К1", mfk.BranchConfModel,
+        r.product, r.recipient_branch, "Концентратор_2",  r.document, r.sign, r.type_of_movement, r.count, r.cost
+        FROM r JOIN mfk ON mfk.BranchId = r."Гуид К1"
+        WHERE BranchConfModel  in ('Р','Супер','Онлайн', 'Э')
+        ),
+doc as (
+        SELECT document as "Все документы"
+        FROM fg
+        GROUP BY document
+), 
+tab1 as (
+        SELECT document,  document  as "K1 <> K2"
+        FROM fg
+        WHERE BranchConfModel  in ('Р','Супер','Онлайн', 'Э')
+              AND "Концентратор_1" <> "Концентратор_2"
+              --AND branch = '1dfa9be4-0d0e-42dd-85d9-496dcf0c19d5' -- филиал для проверки
+        GROUP BY document
+         ),
+tab2 as (
+SELECT  document,  document as "K1 = K2"
+FROM fg
+WHERE BranchConfModel  in ('Р','Супер','Онлайн', 'Э')
+      AND "Концентратор_1" = "Концентратор_2"
+GROUP BY document
+        )
+SELECT count(DISTINCT doc."Все документы") 
+      --doc."Все документы", tab2."K1 = K2", tab1."K1 <> K2"
+FROM doc left join tab1 ON doc."Все документы" = tab1.document
+         left join tab2 ON doc."Все документы" = tab2.document
+WHERE tab2."K1 = K2" <>  '00000000-0000-0000-0000-000000000000'
